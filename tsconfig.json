@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "declarationDir": "./types/",
+    "sourceMap": false,
+    "declaration": true,
+    "module": "ESNext",
+    "target": "es5",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "esModuleInterop": true,
+    /* 严格检查 */
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": false,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    /* 严格检查 */
+    "lib": [
+      "ES2022"
+    ]
+  },
+  "include": [
+    "./src/**/*.ts"
+  ]
+}

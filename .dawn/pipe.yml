@@ -1,0 +1,4 @@
+test:
+  - name: shell
+    script:
+      - eslint ./src/**/*.ts --fix
