@@ -89,12 +89,23 @@ const execute = <V extends Values>(
   return { ...context };
 };
 
-export const reduce = <V extends Values>(context: Context<V>) => {
+export type Reduces<V extends Values> = {
+  framerate: (value: number) => Reduces<V>;
+  duration: (value: number) => Reduces<V>;
+  from: (values: V) => Reduces<V>;
+  to: (values: V) => Reduces<V>;
+  next: () => Reduces<V>;
+  easing: (handler: EasingHandler) => Reduces<V>;
+  sleep: (value: number) => Reduces<V>;
+  effect: (handler: EffectHandler<V>) => Reduces<V>;
+};
+
+export const reduce = <V extends Values>(context: Context<V>): Reduces<V> => {
   return {
     framerate: (value: number) => reduce(framerate(context, value)),
     duration: (value: number) => reduce(duration(context, value)),
-    from: (value: V) => reduce(from(context, value)),
-    to: (value: V) => reduce(to<V>(context, value)),
+    from: (values: V) => reduce(from(context, values)),
+    to: (values: V) => reduce(to<V>(context, values)),
     next: () => reduce(next(context)),
     easing: (handler: EasingHandler) => reduce(easing(context, handler)),
     sleep: (value: number) => reduce(sleep(context, value)),
