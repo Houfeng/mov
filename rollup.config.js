@@ -1,5 +1,5 @@
 import { name } from './package.json';
-import { terser } from 'rollup-plugin-terser';
+// import { terser } from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript2';
 
 export default {
@@ -25,7 +25,7 @@ export default {
     }
   ],
   plugins: [
-    terser(),
+    // terser(),
     typescript({
       useTsconfigDeclarationDir: true,
     }),

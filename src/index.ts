@@ -16,3 +16,4 @@ export const mov = <V extends Values>(from: V) =>
   });
 
 mov.from = mov;
+mov.easing = Easing;

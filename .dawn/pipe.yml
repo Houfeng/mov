@@ -2,3 +2,17 @@ test:
   - name: shell
     script:
       - eslint ./src/**/*.ts --fix
+
+build:
+  - name: shell
+    script:
+      - rollup -c
+
+publish:
+  - name: version
+  - name: shell
+    script:
+      - dn test
+      - dn build
+      - npm pu --registry=https://registry.npmjs.org/
+  - name: submitter
