@@ -8,6 +8,7 @@ export type Context<V extends Values> = {
   duration: number;
   easing: EasingHandler;
   framerate: number;
-  beforeDefer: Defer<any>;
+  prevDefer: Defer<any>;
   defer: Defer<any>;
+  stop?: () => void;
 };

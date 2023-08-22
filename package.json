@@ -1,6 +1,6 @@
 {
   "name": "mov",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Extremely lightweight tween animation library",
   "main": "./dist/mov.cjs.js",
   "module": "./dist/mov.es.js",

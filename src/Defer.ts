@@ -11,5 +11,9 @@ export function Defer<V = unknown>(): Defer<V> {
     resolve = _resolve;
     reject = _reject;
   });
+  /**
+   * 在 reject 时，从不在 console 打印错误
+   */
+  promise.catch(() => void 0);
   return { promise, resolve, reject };
 }

@@ -6,6 +6,7 @@ test:
 build:
   - name: shell
     script:
+      - rm -rf ./dist/
       - rollup -c
 
 publish:
