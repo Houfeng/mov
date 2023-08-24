@@ -1,3 +1,4 @@
+import { Actuator } from "./Actuator";
 import { Context } from "./Context";
 import { Defer } from "./Defer";
 import { EasingHandler } from "./EasingHandler";
@@ -146,80 +147,16 @@ const stop = <V extends Values>(context: Context<V>): Context<V> => {
   return { ...context };
 };
 
-export type Reduces<V extends Values> = {
-  /**
-   * 设置帧率（每秒触发 effect 的次数）
-   * @param value 帧率
-   * @returns
-   */
-  framerate: (value: number) => Reduces<V>;
-
-  /**
-   * 设置持续时间
-   * @param value 持续时间，单位毫秒
-   * @returns
-   */
-  duration: (value: number) => Reduces<V>;
-
-  /**
-   * 设置初始值
-   * @param values 初始值
-   * @returns
-   */
-  from: (values: V) => Reduces<V>;
-
-  /**
-   * 设置终止值
-   * @param values 终止值
-   * @returns
-   */
-  to: (values: V) => Reduces<V>;
-
-  /**
-   * 设置动画使用的缓动函数
-   * @param handler 缓动函数
-   * @returns
-   */
-  easing: (handler: EasingHandler) => Reduces<V>;
-
-  /**
-   * 设置休眠时间，多次设置会累加为总休眠时间
-   * @param value 休眠时间
-   * @returns
-   */
-  sleep: (value: number) => Reduces<V>;
-
-  /**
-   * 设置动画处理函数，并开始执行动画
-   * @param handler 处理函数
-   * @returns
-   */
-  effect: (handler: EffectHandler<V>) => Reduces<V>;
-
-  /**
-   * 定义连接上一个动画的动画，新动画将在前一个动画完成后启动
-   * 上一个动画的 to 将作为新动作的 from，可直接设置新的 to
-   * @returns
-   */
-  next: () => Reduces<V>;
-
-  /**
-   * 停止动画执行
-   * @returns
-   */
-  stop: () => Reduces<V>;
-};
-
-export const reduce = <V extends Values>(context: Context<V>): Reduces<V> => {
+export const compose = <V extends Values>(context: Context<V>): Actuator<V> => {
   return {
-    framerate: (value: number) => reduce(framerate(context, value)),
-    duration: (value: number) => reduce(duration(context, value)),
-    from: (values: V) => reduce(from(context, values)),
-    to: (values: V) => reduce(to<V>(context, values)),
-    easing: (handler: EasingHandler) => reduce(easing(context, handler)),
-    sleep: (value: number) => reduce(sleep(context, value)),
-    effect: (handler: EffectHandler<V>) => reduce(execute(context, handler)),
-    next: () => reduce(next(context)),
-    stop: () => reduce(stop(context)),
+    framerate: (value: number) => compose(framerate(context, value)),
+    duration: (value: number) => compose(duration(context, value)),
+    from: (values: V) => compose(from(context, values)),
+    to: (values: V) => compose(to<V>(context, values)),
+    easing: (handler: EasingHandler) => compose(easing(context, handler)),
+    sleep: (value: number) => compose(sleep(context, value)),
+    effect: (handler: EffectHandler<V>) => compose(execute(context, handler)),
+    next: () => compose(next(context)),
+    stop: () => compose(stop(context)),
   };
 };
